@@ -195,14 +195,10 @@
         return;
       }
 
-      // Hero entrance
-      const heroTl = gsap.timeline({ delay: sessionStorage.getItem("mg_visited") ? 0.1 : 0.2 });
-      heroTl
-        .from(".hero-badge", { autoAlpha: 0, y: 20, duration: 0.6 })
-        .from(".hero h1", { autoAlpha: 0, y: 40, duration: 1 }, "-=0.3")
-        .from(".hero p.lead", { autoAlpha: 0, y: 28 }, "-=0.6")
-        .from(".hero-actions > *", { autoAlpha: 0, y: 24, stagger: 0.12 }, "-=0.5")
-        .from(".hero-rating", { autoAlpha: 0, y: 16 }, "-=0.5");
+      // Hero entrance — animate transform ONLY (never opacity), so the text is
+      // always readable even if rAF is throttled or the tween never completes.
+      gsap.from([".hero-badge", ".hero h1", ".hero p.lead", ".hero-actions", ".hero-rating"],
+        { y: 22, duration: 0.7, ease: "power3.out", stagger: 0.09, clearProps: "transform" });
 
       // Scroll reveals (batched)
       if (typeof ScrollTrigger !== "undefined") {
