@@ -1,0 +1,14 @@
+{
+  "name": "Muliateko Giroa",
+  "short_name": "Muliateko Giroa",
+  "description": "Cafetería, panadería pastelería y restaurante en Hondarribia.",
+  "lang": "es",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FBF6EC",
+  "theme_color": "#92400E",
+  "icons": [
+    { "src": "/assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
