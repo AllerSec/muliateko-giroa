@@ -16,7 +16,7 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <span class="footer-brand"><img class="brand-logo" src="${root}assets/img/logo-mark.png" width="40" height="40" alt="" aria-hidden="true"> Muliateko Giroa</span>
+          <span class="footer-brand"><img class="brand-logo" src="${root}assets/img/logo-mark.png" width="52" height="52" alt="" aria-hidden="true"> Muliateko Giroa</span>
           <p style="color:rgba(255,255,255,.72);max-width:34ch">Cafetería, panadería pastelería y restaurante en el barrio de Muliate, Hondarribia. Producto de la huerta y elaboración propia.</p>
           <div class="footer-social" style="margin-top:1.25rem">
             <a href="https://www.instagram.com/muliatekogiroa/" target="_blank" rel="noopener" aria-label="Instagram de Muliateko Giroa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
