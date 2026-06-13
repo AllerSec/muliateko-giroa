@@ -16,7 +16,7 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <span class="footer-brand"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#brandmark"></use></svg> Muliateko Giroa</span>
+          <span class="footer-brand"><img class="brand-logo" src="${root}assets/img/logo-mark.png" width="40" height="40" alt="" aria-hidden="true"> Muliateko Giroa</span>
           <p style="color:rgba(255,255,255,.72);max-width:34ch">Cafetería, panadería pastelería y restaurante en el barrio de Muliate, Hondarribia. Producto de la huerta y elaboración propia.</p>
           <div class="footer-social" style="margin-top:1.25rem">
             <a href="https://www.instagram.com/muliatekogiroa/" target="_blank" rel="noopener" aria-label="Instagram de Muliateko Giroa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
@@ -47,7 +47,7 @@
             <a href="https://maps.google.com/?q=Plaza+Muliate+10+Hondarribia" target="_blank" rel="noopener">Plaza Muliate, 10 · 20280 Hondarribia</a>
             <a href="tel:+34943122128">943 12 21 28</a>
             <a href="mailto:muliatekogiroa@gmail.com">muliatekogiroa@gmail.com</a>
-            <span style="color:rgba(255,255,255,.72)">Abierto todos los días · hasta 23:00</span>
+            <span style="color:rgba(255,255,255,.72)">Lun–Jue 7:00–22:30 · Vie 7:00–23:00<br>Sáb 8:00–23:00 · Dom 8:00–16:00</span>
           </div>
         </div>
       </div>

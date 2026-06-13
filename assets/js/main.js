@@ -157,38 +157,22 @@
   })();
 
   /* ---------------------------------------------------------------------
-     6) CONTACT form — client-side validation + friendly success
+     6b) Animated number counters (data-count on .stat .num)
   --------------------------------------------------------------------- */
-  function handleForm() {
-    const form = $("#contact-form");
-    if (!form) return;
-    const status = $(".form-status", form);
-    const setError = (field, on) => field.closest(".field")?.classList.toggle("has-error", on);
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      let ok = true;
-      $$("[required]", form).forEach((f) => {
-        const valid = f.type === "email"
-          ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.value.trim())
-          : f.value.trim().length > 0;
-        setError(f, !valid);
-        if (!valid && ok) { f.focus(); }
-        ok = ok && valid;
-      });
-      if (!ok) return;
-      // No backend on static hosting: hand off to the user's mail client.
-      const name = encodeURIComponent($("#cf-name", form)?.value || "");
-      const msg  = encodeURIComponent($("#cf-msg", form)?.value || "");
-      const phone = encodeURIComponent($("#cf-phone", form)?.value || "");
-      const body = `Nombre: ${decodeURIComponent(name)}%0D%0ATeléfono: ${decodeURIComponent(phone)}%0D%0A%0D%0A${decodeURIComponent(msg)}`;
-      const subject = encodeURIComponent("Reserva / Consulta — web Muliateko Giroa");
-      window.location.href = `mailto:muliatekogiroa@gmail.com?subject=${subject}&body=${body}`;
-      if (status) { status.classList.add("ok"); status.textContent = "¡Gracias! Se abrirá tu correo para enviarnos el mensaje."; }
-      form.reset();
+  function runCounters(instant) {
+    $$("[data-count]").forEach((el) => {
+      if (el.dataset.done) return;
+      el.dataset.done = "1";
+      const end = parseFloat(el.dataset.count);
+      const decimals = parseInt(el.dataset.decimals || "0", 10);
+      const prefix = el.dataset.prefix || "";
+      const suffix = el.dataset.suffix || "";
+      const fmt = (v) => prefix + v.toFixed(decimals).replace(".", ",") + suffix;
+      if (instant || typeof gsap === "undefined") { el.textContent = fmt(end); return; }
+      const obj = { v: 0 };
+      gsap.to(obj, { v: end, duration: 1.6, ease: "power2.out", onUpdate: () => { el.textContent = fmt(obj.v); } });
     });
   }
-  handleForm();
 
   /* ---------------------------------------------------------------------
      7) GSAP animations (loaded async; gate everything on availability)
@@ -206,36 +190,48 @@
     }, (ctx) => {
       const { reduce } = ctx.conditions;
       if (reduce) {
-        gsap.set(".reveal", { autoAlpha: 1, y: 0 });
+        gsap.set(".reveal, .reveal-l, .reveal-r", { autoAlpha: 1, x: 0, y: 0 });
+        runCounters(true);
         return;
       }
 
       // Hero entrance
       const heroTl = gsap.timeline({ delay: sessionStorage.getItem("mg_visited") ? 0.1 : 0.2 });
       heroTl
-        .from(".hero .eyebrow", { autoAlpha: 0, y: 24, duration: 0.7 })
-        .from(".hero h1", { autoAlpha: 0, y: 40, duration: 1 }, "-=0.4")
+        .from(".hero-badge", { autoAlpha: 0, y: 20, duration: 0.6 })
+        .from(".hero h1", { autoAlpha: 0, y: 40, duration: 1 }, "-=0.3")
         .from(".hero p.lead", { autoAlpha: 0, y: 28 }, "-=0.6")
         .from(".hero-actions > *", { autoAlpha: 0, y: 24, stagger: 0.12 }, "-=0.5")
-        .from(".hero-meta div", { autoAlpha: 0, y: 20, stagger: 0.1 }, "-=0.5");
+        .from(".hero-rating", { autoAlpha: 0, y: 16 }, "-=0.5");
 
       // Scroll reveals (batched)
       if (typeof ScrollTrigger !== "undefined") {
-        gsap.set(".reveal", { autoAlpha: 0, y: 28 });
+        gsap.set(".reveal", { autoAlpha: 0, y: 30 });
         ScrollTrigger.batch(".reveal", {
-          start: "top 86%",
-          onEnter: (els) => gsap.to(els, { autoAlpha: 1, y: 0, stagger: 0.1, overwrite: true }),
+          start: "top 88%",
+          onEnter: (els) => gsap.to(els, { autoAlpha: 1, y: 0, stagger: 0.08, duration: 0.8, overwrite: true }),
           once: true
         });
+        gsap.set(".reveal-l", { autoAlpha: 0, x: -36 });
+        ScrollTrigger.batch(".reveal-l", { start: "top 85%", once: true,
+          onEnter: (els) => gsap.to(els, { autoAlpha: 1, x: 0, duration: 0.9, overwrite: true }) });
+        gsap.set(".reveal-r", { autoAlpha: 0, x: 36 });
+        ScrollTrigger.batch(".reveal-r", { start: "top 85%", once: true,
+          onEnter: (els) => gsap.to(els, { autoAlpha: 1, x: 0, duration: 0.9, overwrite: true }) });
 
         // Subtle parallax on flagged media
         $$("[data-parallax]").forEach((el) => {
-          gsap.to(el, {
-            yPercent: -12,
-            ease: "none",
-            scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true }
-          });
+          gsap.to(el, { yPercent: -12, ease: "none",
+            scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true } });
         });
+
+        // Animated counters when the stats row enters
+        const statsWrap = $(".stats");
+        if (statsWrap) {
+          ScrollTrigger.create({ trigger: statsWrap, start: "top 85%", once: true, onEnter: () => runCounters(false) });
+        } else {
+          runCounters(false);
+        }
 
         ScrollTrigger.refresh();
       }

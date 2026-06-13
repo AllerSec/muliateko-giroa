@@ -6,22 +6,24 @@
 
 /* ---------- Design Tokens ---------- */
 :root {
-  /* Brand palette (warm brown + cream) */
-  --c-primary:        #92400E;   /* deep roasted brown */
-  --c-primary-700:    #7A350B;
-  --c-primary-900:    #5C2708;
-  --c-secondary:      #B45309;   /* amber / caramel */
-  --c-accent:         #C2691C;   /* terracotta highlight */
-  --c-bg:             #FBF6EC;   /* warm cream paper */
-  --c-bg-soft:        #FEF3C7;   /* light amber wash */
+  /* Brand palette — derived from the Muliateko Giroa logo
+     (teal/turquesa, azul, rojo, oliva) over a warm-neutral paper */
+  --c-primary:        #0B6E6E;   /* teal — brand primary */
+  --c-primary-700:    #095757;
+  --c-primary-900:    #063F3F;   /* deep teal — headings */
+  --c-secondary:      #3B53A0;   /* logo blue */
+  --c-accent:         #9A1B2E;   /* logo red — highlights/CTA pop */
+  --c-olive:          #6A5418;   /* logo olive/mostaza — huerta */
+  --c-cyan:           #60C0D8;   /* logo light cyan — soft accents */
+  --c-bg:             #FBF8F2;   /* warm paper */
+  --c-bg-soft:        #E7F2F1;   /* soft teal wash */
   --c-surface:        #FFFFFF;
-  --c-fg:             #3A2412;   /* espresso text */
-  --c-fg-soft:        #6B4A2E;   /* softened brown text */
-  --c-muted:          #736049;   /* muted brown — WCAG AA on cream & white */
-  --c-border:         #E7D8BF;   /* soft tan border */
-  --c-border-strong:  #D9C39E;
-  --c-olive:          #5F6B3A;   /* huerta / garden green accent */
-  --c-cream-deep:     #F2E6CE;
+  --c-fg:             #1F2D2D;   /* near-black teal-grey text */
+  --c-fg-soft:        #3F5050;   /* softened text */
+  --c-muted:          #5C6B6B;   /* muted — WCAG AA on paper & white */
+  --c-border:         #DCE7E5;   /* soft cool border */
+  --c-border-strong:  #C4D6D3;
+  --c-cream-deep:     #EFE7D6;   /* warm sand band */
 
   /* Typography */
   --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
@@ -44,10 +46,10 @@
 
   /* Radius & shadow */
   --r-sm: 8px;  --r-md: 14px;  --r-lg: 22px;  --r-xl: 32px;  --r-full: 999px;
-  --shadow-sm: 0 1px 3px rgba(58,36,18,.08), 0 1px 2px rgba(58,36,18,.06);
-  --shadow-md: 0 8px 24px -6px rgba(58,36,18,.18);
-  --shadow-lg: 0 24px 60px -16px rgba(58,36,18,.28);
-  --shadow-glow: 0 10px 40px -8px rgba(194,105,28,.35);
+  --shadow-sm: 0 1px 3px rgba(8,34,34,.08), 0 1px 2px rgba(8,34,34,.06);
+  --shadow-md: 0 8px 24px -6px rgba(8,34,34,.18);
+  --shadow-lg: 0 24px 60px -16px rgba(8,34,34,.28);
+  --shadow-glow: 0 10px 40px -8px rgba(11,110,110,.38);
 
   /* Layout */
   --container: 1200px;
@@ -63,7 +65,7 @@
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; color-scheme: light; -webkit-tap-highlight-color: rgba(146,64,14,.18); }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; color-scheme: light; -webkit-tap-highlight-color: rgba(11,110,110,.18); }
 /* Offset anchor targets so they clear the fixed header */
 :target, [id] { scroll-margin-top: calc(var(--nav-h) + 1.5rem); }
 @media (prefers-reduced-motion: reduce) {

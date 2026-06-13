@@ -13,11 +13,11 @@
   <meta property="og:title" content="Carta y Menú | Muliateko Giroa"><meta property="og:description" content="Huevos rotos, bocatas, raciones, ensaladas y pastelería casera en Hondarribia.">
   <meta property="og:url" content="https://muliatekogiroa.es/carta.html"><meta property="og:image" content="https://muliatekogiroa.es/assets/img/og/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Carta y Menú | Muliateko Giroa"><meta name="twitter:image" content="https://muliatekogiroa.es/assets/img/og/og-image.jpg">
-  <meta name="theme-color" content="#92400E">
-  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="assets/img/favicon.svg"><link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#0B6E6E">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml"><link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon-192.png"><link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png"><link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/fonts/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/karla-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/fonts.css"><link rel="stylesheet" href="assets/css/styles.css"><link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/fonts.css"><link rel="stylesheet" href="assets/css/styles.css"><link rel="stylesheet" href="assets/css/components.css"><link rel="stylesheet" href="assets/css/modern.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -49,7 +49,7 @@
   <header class="site-header is-solid">
     <div class="container nav">
       <a class="brand" href="index.html" aria-label="Muliateko Giroa — Inicio">
-        <svg viewBox="0 0 48 48" aria-hidden="true"><use href="#brandmark"></use></svg>
+        <img class="brand-logo" src="assets/img/logo-mark.png" width="44" height="44" alt="" aria-hidden="true">
         <span>Muliateko Giroa<span class="brand-sub">Hondarribia</span></span>
       </a>
       <nav class="nav-links" aria-label="Navegación principal">
@@ -58,7 +58,7 @@
         <a class="nav-link" href="nosotros.html">Nosotros</a>
         <a class="nav-link" href="galeria.html">Galería</a>
         <a class="nav-link" href="contacto.html">Contacto</a>
-        <a class="btn" href="contacto.html">Reservar mesa</a>
+        <a class="btn btn-accent" href="contacto.html">Reservar mesa</a>
       </nav>
       <div class="nav-actions">
         <a class="btn" href="tel:+34943122128">Llamar</a>
@@ -69,18 +69,34 @@
 
   <main id="main">
     <!-- Page hero -->
-    <section class="section-tight" style="padding-top:calc(var(--nav-h) + 3rem);background:var(--c-cream-deep)">
+    <section class="section-tight mesh" style="padding-top:calc(var(--nav-h) + 3.5rem)">
       <div class="container">
         <div class="section-head is-centered">
-          <span class="eyebrow is-centered">Nuestra carta</span>
-          <h1 class="text-balance">Cocina casera con producto de la huerta</h1>
-          <p class="text-pretty" style="margin-inline:auto">Desayunos, bocatas, platos combinados, raciones para compartir, ensaladas y pastelería propia. Todo elaborado con producto de cercanía. <strong>Próximamente más novedades.</strong></p>
+          <p class="s-label reveal" style="justify-content:center">Nuestra carta</p>
+          <h1 class="text-balance reveal">Cocina casera, raciones generosas</h1>
+          <p class="text-pretty reveal" style="margin-inline:auto;color:var(--c-fg-soft)">Desayunos y tostadas sobre pan propio, raciones para compartir, ensaladas, hamburguesas y nuestra pastelería casera. Todo con producto de cercanía.</p>
+          <div class="chips reveal" style="justify-content:center;margin-top:1.5rem">
+            <a class="chip" href="#con-tres-huevos"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg> Huevos</a>
+            <a class="chip" href="#bocatas">Bocatas</a>
+            <a class="chip" href="#combinados">Combinados</a>
+            <a class="chip" href="#hamburguesas">Hamburguesas</a>
+            <a class="chip" href="#raciones">Raciones</a>
+            <a class="chip" href="#ensaladas">Ensaladas</a>
+            <a class="chip" href="#dulce">Dulce</a>
+          </div>
         </div>
-        <div class="grid grid-3" role="list">
-          <figure class="menu-hero-card reveal" role="listitem"><img src="assets/img/menu/tostada-jamon.webp" alt="Huevos rotos servidos en Muliateko Giroa" width="1600" height="1000" loading="lazy" data-full="assets/img/menu/tostada-jamon.webp"><figcaption>Con tres huevos</figcaption></figure>
-          <figure class="menu-hero-card reveal" role="listitem"><img src="assets/img/menu/raciones.webp" alt="Raciones para compartir en Muliateko Giroa" width="1600" height="1000" loading="lazy"><figcaption>Raciones</figcaption></figure>
-          <figure class="menu-hero-card reveal" role="listitem"><img src="assets/img/menu/pasteleria.webp" alt="Pastelería casera de Muliateko Giroa" width="1600" height="1000" loading="lazy"><figcaption>Pastelería</figcaption></figure>
+      </div>
+    </section>
+
+    <!-- Menú del día banner -->
+    <section class="container" aria-label="Menú del día">
+      <div class="cta-band reveal" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem;text-align:left;padding:clamp(1.75rem,3vw,2.5rem)">
+        <div>
+          <p class="s-label" style="color:var(--c-cyan)"><span class="n" style="color:#fff">De lunes a viernes</span></p>
+          <h2 style="color:#fff;margin-top:.3rem">Menú del día por 11 €</h2>
+          <p style="color:rgba(255,255,255,.85);margin-top:.3rem">Primero, segundo, postre y bebida. Cocina casera que cambia cada día.</p>
         </div>
+        <a class="btn btn-accent btn-lg" href="contacto.html">Reservar mesa</a>
       </div>
     </section>
 
@@ -88,7 +104,7 @@
       <div class="container" style="max-width:1000px">
 
         <!-- CON TRES HUEVOS -->
-        <div class="menu-cat reveal">
+        <div class="menu-cat reveal" id="con-tres-huevos">
           <div class="menu-cat-head"><h3>Con tres huevos</h3><span class="rule"></span></div>
           <div class="menu-list">
             <div class="menu-item"><span class="mi-name">Huevos rotos con jamón ibérico</span><span class="mi-price">13,00 €</span></div>
@@ -111,7 +127,7 @@
         </div>
 
         <!-- BOCATAS -->
-        <div class="menu-cat reveal">
+        <div class="menu-cat reveal" id="bocatas">
           <div class="menu-cat-head"><h3>Bocatas</h3><span class="rule"></span></div>
           <div class="menu-list">
             <div class="menu-item"><span class="mi-name">Jamón ibérico</span><span class="mi-price">9,00 €</span><span class="mi-desc">Con queso o tumaca</span></div>
@@ -125,7 +141,7 @@
         </div>
 
         <!-- PLATOS COMBINADOS -->
-        <div class="menu-cat reveal">
+        <div class="menu-cat reveal" id="combinados">
           <div class="menu-cat-head"><h3>Platos combinados</h3><span class="rule"></span></div>
           <div class="menu-list">
             <div class="menu-item"><span class="mi-name">Huevos con jamón ibérico y patatas</span><span class="mi-price">13,50 €</span></div>
@@ -136,8 +152,18 @@
           </div>
         </div>
 
+        <!-- HAMBURGUESAS -->
+        <div class="menu-cat reveal" id="hamburguesas">
+          <div class="menu-cat-head"><h3>Hamburguesas</h3><span class="rule"></span></div>
+          <div class="menu-list">
+            <div class="menu-item"><span class="mi-name">Homer S.</span><span class="mi-desc">Nuestra hamburguesa de vacuno con todo el sabor de la casa, con patatas</span></div>
+            <div class="menu-item"><span class="mi-name">Dinamita Pa Los Pollos</span><span class="mi-desc">Pollo crujiente con un toque picante, con patatas</span></div>
+            <div class="menu-item"><span class="mi-name">Vegan Burger</span><span class="mi-desc">Opción 100 % vegetal, con patatas</span></div>
+          </div>
+        </div>
+
         <!-- RACIONES -->
-        <div class="menu-cat reveal">
+        <div class="menu-cat reveal" id="raciones">
           <div class="menu-cat-head"><h3>Raciones</h3><span class="rule"></span></div>
           <div class="menu-list">
             <div class="menu-item"><span class="mi-name">Patatas bravas</span><span class="mi-price">8,00 €</span></div>
@@ -154,7 +180,7 @@
         </div>
 
         <!-- ENSALADAS -->
-        <div class="menu-cat reveal">
+        <div class="menu-cat reveal" id="ensaladas">
           <div class="menu-cat-head"><h3>Ensaladas</h3><span class="rule"></span></div>
           <div class="menu-list">
             <div class="menu-item"><span class="mi-name">Ensaladilla rusa</span><span class="mi-price">9,50 €</span><span class="mi-desc">Patata cocida, atún, huevo cocido, aceitunas, pimientos del piquillo y mahonesa</span></div>
@@ -165,6 +191,17 @@
           </div>
         </div>
 
+        <!-- DULCE / PASTELERÍA -->
+        <div class="menu-cat reveal" id="dulce">
+          <div class="menu-cat-head"><h3>Dulce &amp; pastelería</h3><span class="rule"></span></div>
+          <div class="menu-list">
+            <div class="menu-item"><span class="mi-name">Tarta de queso casera</span><span class="mi-desc">La que repiten quienes nos visitan</span></div>
+            <div class="menu-item"><span class="mi-name">Bizcochos y bollería del día</span><span class="mi-desc">Recién horneados cada mañana</span></div>
+            <div class="menu-item"><span class="mi-name">Napolitanas y croissants</span><span class="mi-desc">De elaboración propia</span></div>
+            <div class="menu-item"><span class="mi-name">Pan artesano para llevar</span><span class="mi-desc">Y verdura de los caseríos cercanos</span></div>
+          </div>
+        </div>
+
         <p class="u-center" style="color:var(--c-muted);font-style:italic;margin-top:2rem">Próximamente más novedades · Laister euskeraz ere</p>
       </div>
     </section>
@@ -172,11 +209,12 @@
     <!-- CTA -->
     <section class="section" style="padding-top:0">
       <div class="container">
-        <div class="cta-band u-center reveal">
-          <span class="eyebrow is-centered" style="color:var(--c-bg-soft)">¿Te has quedado con hambre?</span>
+        <div class="cta-xl reveal">
+          <img class="bgimg" src="assets/img/hero/hero-terraza.webp" alt="" aria-hidden="true" loading="lazy">
+          <p class="s-label" style="justify-content:center;color:var(--c-cyan)"><span class="n" style="color:#fff">¿Te has quedado con hambre?</span></p>
           <h2 class="text-balance">Reserva tu mesa en Muliate</h2>
           <p class="text-pretty">Comidas, cenas y todo lo que ves en la carta, en un entorno tranquilo con terraza.</p>
-          <div class="hero-actions"><a class="btn btn-lg" style="--btn-bg:#fff;--btn-fg:var(--c-primary-900)" href="contacto.html">Reservar mesa</a><a class="btn btn-secondary btn-lg" href="tel:+34943122128">943 12 21 28</a></div>
+          <div class="hero-actions" style="justify-content:center;margin-top:2rem"><a class="btn btn-accent btn-lg" href="contacto.html">Reservar mesa</a><a class="btn btn-secondary btn-lg" href="tel:+34943122128">943 12 21 28</a></div>
         </div>
       </div>
     </section>
@@ -185,7 +223,7 @@
   <div data-footer></div>
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-    <g id="brandmark"><linearGradient id="cupGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B45309"/><stop offset="1" stop-color="#92400E"/></linearGradient><g fill="none" stroke="#C2691C" stroke-width="2" stroke-linecap="round"><path d="M19 11c-1.6-1.6-1.6-3.4 0-5"/><path d="M24 11c-1.6-1.6-1.6-3.4 0-5"/><path d="M29 11c-1.6-1.6-1.6-3.4 0-5"/></g><path d="M12 16h22v9a11 11 0 0 1-11 11 11 11 0 0 1-11-11z" fill="url(#cupGrad)"/><path d="M34 19h3a4 4 0 0 1 0 8h-3" fill="none" stroke="#92400E" stroke-width="3" stroke-linecap="round"/></g>
+    <g id="brandmark"><linearGradient id="cupGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B45309"/><stop offset="1" stop-color="#0B6E6E"/></linearGradient><g fill="none" stroke="#C2691C" stroke-width="2" stroke-linecap="round"><path d="M19 11c-1.6-1.6-1.6-3.4 0-5"/><path d="M24 11c-1.6-1.6-1.6-3.4 0-5"/><path d="M29 11c-1.6-1.6-1.6-3.4 0-5"/></g><path d="M12 16h22v9a11 11 0 0 1-11 11 11 11 0 0 1-11-11z" fill="url(#cupGrad)"/><path d="M34 19h3a4 4 0 0 1 0 8h-3" fill="none" stroke="#0B6E6E" stroke-width="3" stroke-linecap="round"/></g>
   </defs></svg>
 
   <script src="assets/js/vendor/gsap.min.js" defer></script>
