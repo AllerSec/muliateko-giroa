@@ -33,6 +33,7 @@ body.loaded .loader { opacity: 0; visibility: hidden; pointer-events: none; }
 }
 .site-header.is-scrolled, .site-header.is-solid {
   background: color-mix(in srgb, var(--c-bg) 88%, transparent);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
   backdrop-filter: blur(12px) saturate(1.2);
   box-shadow: 0 1px 0 var(--c-border), var(--shadow-sm);
 }
@@ -110,7 +111,11 @@ body.loaded .loader { opacity: 0; visibility: hidden; pointer-events: none; }
   .nav-links .btn { display: inline-flex; margin-top: 1rem; width: 100%; }
   /* Solid header on mobile: backdrop-filter would make the fixed header the
      containing block of the fixed .nav-links panel and clip the open menu. */
-  .site-header.is-scrolled, .site-header.is-solid { background: var(--c-bg); backdrop-filter: none; }
+  .site-header.is-scrolled, .site-header.is-solid {
+    background: var(--c-bg);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 }
 
 /* ---------- Hero ---------- */
