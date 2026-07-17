@@ -50,8 +50,19 @@
 .bento-cell.brand h3, .bento-cell.brand .big { color: #fff; }
 .bento-cell.brand p { color: rgba(255,255,255,.85); }
 .bento-cell.brand .big { font-family: var(--font-display); font-size: clamp(2.4rem,2rem+2vw,3.4rem); line-height: 1; }
-@media (max-width: 860px) { .bento { grid-template-columns: repeat(2, 1fr); } .bento-cell.col2 { grid-column: span 2; } .bento-cell.row2 { grid-row: span 1; } }
-@media (max-width: 520px) { .bento { grid-template-columns: 1fr; } .bento-cell.col2 { grid-column: span 1; } }
+/* The .bento-cell.col2.row2 base rule (3 classes) outranks 2-class overrides,
+   so these breakpoint resets must include the compound selector too. */
+@media (max-width: 860px) {
+  .bento { grid-template-columns: repeat(2, 1fr); }
+  .bento-cell.col2, .bento-cell.col2.row2 { grid-column: span 2; }
+  .bento-cell.row2, .bento-cell.col2.row2 { grid-row: span 1; }
+}
+@media (max-width: 520px) {
+  .bento { grid-template-columns: 1fr; }
+  .bento-cell.col2, .bento-cell.col2.row2 { grid-column: span 1; }
+  /* image cells need real height once nothing sits beside them */
+  .bento-cell.media { min-height: 240px; }
+}
 
 /* ---------- DISH SHOWCASE (horizontal scroll-snap) ---------- */
 .showcase { display: grid; gap: 1.5rem; }
