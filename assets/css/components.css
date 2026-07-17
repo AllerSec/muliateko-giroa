@@ -4,7 +4,7 @@
 
 /* ---------- Page loader (first visit only; JS adds .loaded) ---------- */
 .loader {
-  position: fixed; inset: 0; z-index: 9999;
+  position: fixed; inset: 0; z-index: var(--z-loader);
   display: grid; place-items: center;
   background: var(--c-primary-900);
   transition: opacity .6s var(--ease-out), visibility .6s;
@@ -27,7 +27,7 @@ body.loaded .loader { opacity: 0; visibility: hidden; pointer-events: none; }
 
 /* ---------- Header / Nav ---------- */
 .site-header {
-  position: fixed; inset: 0 0 auto 0; z-index: 100; height: var(--nav-h);
+  position: fixed; inset: 0 0 auto 0; z-index: var(--z-sticky); height: var(--nav-h);
   display: flex; align-items: center;
   transition: background var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out), backdrop-filter var(--dur);
 }
@@ -47,7 +47,7 @@ body.loaded .loader { opacity: 0; visibility: hidden; pointer-events: none; }
 .site-header.over-hero:not(.is-scrolled) .nav-actions .btn:not(.btn-accent) {
   --btn-bg: rgba(255,255,255,.14); --btn-fg: #fff; border-color: rgba(255,255,255,.4); backdrop-filter: blur(6px);
 }
-.site-header.over-hero:not(.is-scrolled) .nav-toggle { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.4); }
+.site-header.over-hero:not(.is-scrolled) .nav-toggle { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.65); }
 .site-header.over-hero:not(.is-scrolled) .nav-toggle span,
 .site-header.over-hero:not(.is-scrolled) .nav-toggle span::before,
 .site-header.over-hero:not(.is-scrolled) .nav-toggle span::after { background: #fff; }
@@ -66,14 +66,15 @@ body.loaded .loader { opacity: 0; visibility: hidden; pointer-events: none; }
   transition: color var(--dur) var(--ease-out), background var(--dur) var(--ease-out);
 }
 .nav-link::after {
-  content: ""; position: absolute; left: 50%; bottom: .35rem; width: 0; height: 2px;
-  background: var(--c-accent); border-radius: 2px; transform: translateX(-50%);
-  transition: width var(--dur) var(--ease-out);
+  content: ""; position: absolute; left: 50%; bottom: .35rem; width: 22px; height: 2px;
+  background: var(--c-accent); border-radius: 2px;
+  transform: translateX(-50%) scaleX(0); transform-origin: center;
+  transition: transform var(--dur) var(--ease-out);
 }
 .nav-link:hover { color: var(--c-primary-900); }
-.nav-link:hover::after { width: 18px; }
+.nav-link:hover::after { transform: translateX(-50%) scaleX(.8); }
 .nav-link[aria-current="page"] { color: var(--c-primary-900); }
-.nav-link[aria-current="page"]::after { width: 22px; }
+.nav-link[aria-current="page"]::after { transform: translateX(-50%) scaleX(1); }
 .nav-actions { display: flex; align-items: center; gap: .75rem; }
 
 /* Mobile nav */
@@ -99,8 +100,8 @@ body.loaded .loader { opacity: 0; visibility: hidden; pointer-events: none; }
   }
   .nav-links.is-open { transform: translateX(0); overscroll-behavior: contain; }
   .nav-link { width: 100%; font-size: var(--fs-xl); padding: 1rem 0; font-family: var(--font-display); }
-  .nav-link::after { left: 0; transform: none; bottom: .6rem; }
-  .nav-link:hover::after, .nav-link[aria-current="page"]::after { width: 30px; }
+  .nav-link::after { left: 0; width: 30px; bottom: .6rem; transform-origin: left; transform: scaleX(0); }
+  .nav-link:hover::after, .nav-link[aria-current="page"]::after { transform: scaleX(1); }
   .nav-actions .btn { display: none; }
   .nav-links .btn { display: inline-flex; margin-top: 1rem; width: 100%; }
 }
@@ -134,6 +135,43 @@ body.loaded .loader { opacity: 0; visibility: hidden; pointer-events: none; }
 
 /* floating steam decoration over hero */
 .hero-steam { position: absolute; z-index: 2; opacity: .5; pointer-events: none; }
+
+/* Two lead lengths: full copy on desktop, one-liner on mobile */
+.hero-lead-short { display: none; }
+
+/* Mobile hero: stacked layout. The photo leaves the background and becomes a
+   framed card below the content — full brightness, nothing overlapping it,
+   and a solid brand panel behind the header/text for guaranteed contrast. */
+@media (max-width: 880px) {
+  .hero {
+    display: flex; flex-direction: column; align-items: stretch; min-height: 0;
+    background: linear-gradient(172deg, var(--c-primary-900) 0%, var(--c-primary-700) 72%, var(--c-primary) 100%);
+  }
+  .hero .container { order: 1; padding-block: 1.6rem 1.9rem; }
+  .hero-bg {
+    position: relative; inset: auto; order: 2;
+    margin: 0 clamp(1.25rem, 5vw, 2.5rem) 1.9rem;
+    aspect-ratio: 4 / 3; border-radius: var(--r-lg); overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .hero-scrim, .hero-scroll-hint { display: none; }
+
+  /* Compact, scannable content */
+  .hero h1 { font-size: clamp(2.1rem, 8vw, 2.9rem); max-width: none; text-shadow: none; }
+  .hero h1 br { display: none; }
+  .hero-lead-full { display: none; }
+  .hero-lead-short { display: block; }
+  .hero p.lead { font-size: var(--fs-lg); color: rgba(255,255,255,.95); }
+
+  /* "Abierto hoy" chip: solid pill, no transparency over imagery.
+     Scoped under .hero to outrank the base .hero-badge rule in modern.css,
+     which loads after this file. */
+  .hero .hero-badge { background: #fff; border-color: #fff; color: var(--c-primary-900); margin-bottom: 1.1rem; }
+
+  /* Stacked full-width CTAs — reserva primero, jerarquía clara */
+  .hero-actions { margin-top: 1.4rem; gap: .75rem; }
+  .hero-actions .btn { flex: 1 1 100%; }
+}
 
 /* ---------- Feature / value cards ---------- */
 .feature { padding: clamp(1.6rem, 3vw, 2.2rem); display: grid; gap: 1rem; align-content: start; height: 100%; }
@@ -270,12 +308,12 @@ body.loaded .loader { opacity: 0; visibility: hidden; pointer-events: none; }
   transform: translateX(-50%) translateY(4px); white-space: nowrap;
   background: var(--c-primary-900); color: #fff; font-size: var(--fs-xs); font-weight: 600;
   padding: .4rem .7rem; border-radius: var(--r-sm); opacity: 0; pointer-events: none;
-  transition: opacity var(--dur), transform var(--dur); z-index: 50;
+  transition: opacity var(--dur), transform var(--dur); z-index: var(--z-tooltip);
 }
 [data-tooltip]:hover::after, [data-tooltip]:focus-visible::after { opacity: 1; transform: translateX(-50%) translateY(0); }
 
 /* ---------- Lightbox ---------- */
-.lightbox { position: fixed; inset: 0; z-index: 9998; display: grid; place-items: center; padding: clamp(1rem,4vw,3rem); background: rgba(8,34,34,.85); backdrop-filter: blur(6px); opacity: 0; transition: opacity .3s var(--ease-out); overscroll-behavior: contain; }
+.lightbox { position: fixed; inset: 0; z-index: var(--z-overlay); display: grid; place-items: center; padding: clamp(1rem,4vw,3rem); background: rgba(8,34,34,.85); backdrop-filter: blur(6px); opacity: 0; transition: opacity .3s var(--ease-out); overscroll-behavior: contain; }
 .lightbox.is-open { opacity: 1; }
 .lightbox img { max-width: 100%; max-height: 86vh; border-radius: var(--r-md); box-shadow: var(--shadow-lg); transform: scale(.96); transition: transform .35s var(--ease-out); }
 .lightbox.is-open img { transform: scale(1); }

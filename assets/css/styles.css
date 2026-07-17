@@ -56,6 +56,13 @@
   --container-wide: 1400px;
   --nav-h: 76px;
 
+  /* Z-index scale (semantic, ascending: base → sticky → overlay → modal → loader) */
+  --z-sticky:  100;   /* fixed site header */
+  --z-tooltip: 400;
+  --z-skip:    600;   /* skip-link must clear the header when focused */
+  --z-overlay: 800;   /* lightbox backdrop */
+  --z-loader:  900;   /* first-paint loader, above everything */
+
   /* Motion */
   --ease-out: cubic-bezier(.16,1,.3,1);
   --ease-in-out: cubic-bezier(.65,0,.35,1);
@@ -102,6 +109,9 @@ h4 { font-size: var(--fs-xl); }
 p { max-width: 68ch; }
 strong { font-weight: 700; }
 
+/* Section kicker — a leading rule + named label. One brand system, no numbers.
+   Used site-wide; `.is-centered` adds a trailing rule for centered heads.
+   `.on-dark` recolors it for use over photo/teal CTAs. */
 .eyebrow {
   display: inline-flex; align-items: center; gap: .6em;
   font-family: var(--font-body); font-weight: 600;
@@ -112,10 +122,12 @@ strong { font-weight: 700; }
   content: ""; width: 28px; height: 2px; background: currentColor; opacity: .7;
   display: inline-block;
 }
+.eyebrow.is-centered { justify-content: center; }
 .eyebrow.is-centered::after {
   content: ""; width: 28px; height: 2px; background: currentColor; opacity: .7;
   display: inline-block;
 }
+.eyebrow.on-dark { color: var(--c-cyan); }
 
 .text-balance { text-wrap: balance; }
 .text-pretty { text-wrap: pretty; }
@@ -132,7 +144,7 @@ strong { font-weight: 700; }
 
 /* Skip link */
 .skip-link {
-  position: absolute; left: 1rem; top: -100px; z-index: 1000;
+  position: absolute; left: 1rem; top: -100px; z-index: var(--z-skip);
   background: var(--c-primary); color: #fff; padding: .75rem 1.25rem;
   border-radius: var(--r-sm); transition: top var(--dur) var(--ease-out);
 }
@@ -211,6 +223,14 @@ strong { font-weight: 700; }
 
 /* ---------- Utilities ---------- */
 .u-center { text-align: center; }
+.text-soft { color: var(--c-fg-soft); }
+.lead-center { margin-inline: auto; color: var(--c-fg-soft); }
+.actions-center { justify-content: center; }
+.u-mt-md { margin-top: 1.6rem; }
+.u-mt-lg { margin-top: 2rem; }
+/* Section head that splits a titled block from a trailing action on one row */
+.section-head.is-split { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.5rem; max-width: none; }
+.section-head.is-split > :first-child { max-width: 46ch; }
 .u-sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;

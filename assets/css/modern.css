@@ -4,11 +4,6 @@
    Builds on tokens in styles.css. Teal/blue/red/olive brand palette.
    ========================================================================== */
 
-/* ---------- Section label (sticky eyebrow) ---------- */
-.s-label { display: flex; align-items: center; gap: .7rem; font-size: var(--fs-xs); font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--c-primary); }
-.s-label .n { font-family: var(--font-display); font-size: var(--fs-sm); color: var(--c-accent); font-weight: 700; letter-spacing: 0; }
-.s-label .line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--c-border-strong), transparent); }
-
 /* ---------- Gradient mesh / texture backdrops ---------- */
 .mesh { position: relative; isolation: isolate; }
 .mesh::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
@@ -31,14 +26,6 @@
 .hero-rating { display: inline-flex; align-items: center; gap: .6rem; margin-top: 1.4rem; color: #fff; font-weight: 600; font-size: var(--fs-sm); }
 .hero-rating .stars { display: inline-flex; gap: 2px; color: #FBBF24; }
 .hero-rating .stars svg { width: 18px; height: 18px; }
-
-/* ---------- Stat counters ---------- */
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1rem, 2vw, 2rem); }
-@media (max-width: 720px) { .stats { grid-template-columns: repeat(2, 1fr); } }
-.stat { text-align: center; padding: 1.2rem .5rem; }
-.stat .num { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.2rem, 1.4rem + 3vw, 3.4rem); line-height: 1; color: var(--c-primary); font-variant-numeric: tabular-nums; }
-.stat .num .suf { color: var(--c-accent); }
-.stat .lab { margin-top: .5rem; font-size: var(--fs-sm); color: var(--c-fg-soft); font-weight: 500; }
 
 /* ---------- BENTO GRID ---------- */
 .bento { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: minmax(180px, auto); gap: clamp(.85rem, 1.4vw, 1.25rem); }

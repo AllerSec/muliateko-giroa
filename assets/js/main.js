@@ -101,12 +101,12 @@
     box.setAttribute("role", "dialog");
     box.setAttribute("aria-modal", "true");
     box.setAttribute("aria-label", "Imagen ampliada");
-    box.innerHTML =
-      '<button class="lightbox-close" aria-label="Cerrar imagen">&times;</button>' +
-      '<img alt="">';
+    box.innerHTML = '<button class="lightbox-close" aria-label="Cerrar imagen">&times;</button>';
+    const img = document.createElement("img");
+    img.alt = "";
+    box.appendChild(img);
     box.hidden = true;
     document.body.appendChild(box);
-    const img = $("img", box);
     const closeBtn = $(".lightbox-close", box);
     let lastFocus = null;
 
@@ -121,7 +121,7 @@
     const close = () => {
       box.classList.remove("is-open");
       document.body.style.overflow = "";
-      window.setTimeout(() => { box.hidden = true; img.src = ""; }, 300);
+      window.setTimeout(() => { box.hidden = true; img.removeAttribute("src"); }, 300);
       if (lastFocus) lastFocus.focus();
     };
     items.forEach((it) => {
@@ -157,24 +157,6 @@
   })();
 
   /* ---------------------------------------------------------------------
-     6b) Animated number counters (data-count on .stat .num)
-  --------------------------------------------------------------------- */
-  function runCounters(instant) {
-    $$("[data-count]").forEach((el) => {
-      if (el.dataset.done) return;
-      el.dataset.done = "1";
-      const end = parseFloat(el.dataset.count);
-      const decimals = parseInt(el.dataset.decimals || "0", 10);
-      const prefix = el.dataset.prefix || "";
-      const suffix = el.dataset.suffix || "";
-      const fmt = (v) => prefix + v.toFixed(decimals).replace(".", ",") + suffix;
-      if (instant || typeof gsap === "undefined") { el.textContent = fmt(end); return; }
-      const obj = { v: 0 };
-      gsap.to(obj, { v: end, duration: 1.6, ease: "power2.out", onUpdate: () => { el.textContent = fmt(obj.v); } });
-    });
-  }
-
-  /* ---------------------------------------------------------------------
      7) GSAP animations (loaded async; gate everything on availability)
   --------------------------------------------------------------------- */
   function initGsap() {
@@ -191,7 +173,6 @@
       const { reduce } = ctx.conditions;
       if (reduce) {
         gsap.set(".reveal, .reveal-l, .reveal-r", { autoAlpha: 1, x: 0, y: 0 });
-        runCounters(true);
         return;
       }
 
@@ -215,19 +196,14 @@
         ScrollTrigger.batch(".reveal-r", { start: "top 85%", once: true,
           onEnter: (els) => gsap.to(els, { autoAlpha: 1, x: 0, duration: 0.9, overwrite: true }) });
 
-        // Subtle parallax on flagged media
+        // Subtle parallax on flagged media. Skipped for the hero photo on
+        // mobile, where it lives inside a framed card and must not shift.
+        const heroIsStacked = window.matchMedia("(max-width: 880px)").matches;
         $$("[data-parallax]").forEach((el) => {
+          if (heroIsStacked && el.closest(".hero-bg")) return;
           gsap.to(el, { yPercent: -12, ease: "none",
             scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: true } });
         });
-
-        // Animated counters when the stats row enters
-        const statsWrap = $(".stats");
-        if (statsWrap) {
-          ScrollTrigger.create({ trigger: statsWrap, start: "top 85%", once: true, onEnter: () => runCounters(false) });
-        } else {
-          runCounters(false);
-        }
 
         ScrollTrigger.refresh();
       }
