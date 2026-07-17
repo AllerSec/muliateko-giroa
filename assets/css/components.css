@@ -41,9 +41,13 @@ body.loaded .loader { opacity: 0; visibility: hidden; pointer-events: none; }
 .site-header.over-hero:not(.is-scrolled) .brand { color: #fff; text-shadow: 0 1px 12px rgba(0,0,0,.35); }
 .site-header.over-hero:not(.is-scrolled) .brand-sub { color: rgba(255,255,255,.85); }
 .site-header.over-hero:not(.is-scrolled) .brand-logo { filter: drop-shadow(0 1px 6px rgba(0,0,0,.4)); }
-.site-header.over-hero:not(.is-scrolled) .nav-link { color: rgba(255,255,255,.92); }
-.site-header.over-hero:not(.is-scrolled) .nav-link:hover,
-.site-header.over-hero:not(.is-scrolled) .nav-link[aria-current="page"] { color: #fff; }
+/* White links only apply to the inline desktop nav; on mobile the links live
+   in the light slide-in panel and must keep their dark base colors. */
+@media (min-width: 881px) {
+  .site-header.over-hero:not(.is-scrolled) .nav-link { color: rgba(255,255,255,.92); }
+  .site-header.over-hero:not(.is-scrolled) .nav-link:hover,
+  .site-header.over-hero:not(.is-scrolled) .nav-link[aria-current="page"] { color: #fff; }
+}
 .site-header.over-hero:not(.is-scrolled) .nav-actions .btn:not(.btn-accent) {
   --btn-bg: rgba(255,255,255,.14); --btn-fg: #fff; border-color: rgba(255,255,255,.4); backdrop-filter: blur(6px);
 }
@@ -104,6 +108,9 @@ body.loaded .loader { opacity: 0; visibility: hidden; pointer-events: none; }
   .nav-link:hover::after, .nav-link[aria-current="page"]::after { transform: scaleX(1); }
   .nav-actions .btn { display: none; }
   .nav-links .btn { display: inline-flex; margin-top: 1rem; width: 100%; }
+  /* Solid header on mobile: backdrop-filter would make the fixed header the
+     containing block of the fixed .nav-links panel and clip the open menu. */
+  .site-header.is-scrolled, .site-header.is-solid { background: var(--c-bg); backdrop-filter: none; }
 }
 
 /* ---------- Hero ---------- */
